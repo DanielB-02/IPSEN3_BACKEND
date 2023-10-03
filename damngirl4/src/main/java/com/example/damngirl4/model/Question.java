@@ -13,9 +13,9 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String textQuestion;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonManagedReference
-    private Answer answer;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+//    @JsonManagedReference
+//    private Answer answer;
 
     public Long getId() {
         return id;
@@ -29,12 +29,12 @@ public class Question {
         this.textQuestion = textQuestion;
     }
 
-    public Answer getAnswer() {
-        return answer;
-    }
+//    public Answer getAnswer() {
+//        return answer;
+//    }
 
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
-    }
+//    public void setAnswer(Answer answer) {
+//        this.answer = answer;
+//    }
 
 }
