@@ -13,9 +13,8 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String textAnswer;
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//    @JsonBackReference
-//    private Question question;
+    @ManyToOne
+    private Question question;
 
     public Long getId() {
         return id;
@@ -29,6 +28,13 @@ public class Answer {
         this.textAnswer = textAnswer;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 //    public Question getQuestion() {
 //        return question;
 //    }

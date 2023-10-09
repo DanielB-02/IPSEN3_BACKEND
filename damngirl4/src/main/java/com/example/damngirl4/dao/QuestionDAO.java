@@ -17,8 +17,8 @@ public class QuestionDAO {
     private QuestionRepository questionRepository;
 
     public Question save(Question newQuestion){
-        Question answer = this.questionRepository.save(newQuestion);
-        return answer;
+        Question question = this.questionRepository.save(newQuestion);
+        return question;
     }
 
     public Iterable<Question> readAll(){

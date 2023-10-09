@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -17,6 +18,10 @@ public class AnswerDAO {
     public ArrayList<Answer> all(){
         ArrayList<Answer> allAnswers = (ArrayList<Answer>) this.answerRepository.findAll();
         return allAnswers;
+    }
+
+    public List<Answer> getByQuestionId(Long questionId) {
+        return this.answerRepository.findByQuestionId(questionId);
     }
 
     public Answer getById(long id){
