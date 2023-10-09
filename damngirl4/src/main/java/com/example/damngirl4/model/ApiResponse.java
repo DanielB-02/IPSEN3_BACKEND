@@ -20,6 +20,7 @@ public class ApiResponse<Type> {
 
     public ApiResponse(HttpStatus code, Type payload, String message) {
         this.code = code;
+        this.payload = payload;
         this.message = message;
     }
 
