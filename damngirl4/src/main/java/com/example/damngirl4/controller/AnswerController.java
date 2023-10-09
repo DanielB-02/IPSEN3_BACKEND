@@ -21,6 +21,12 @@ public class AnswerController {
         return new ApiResponse(HttpStatus.ACCEPTED, this.answerDAO.all());
     }
 
+    @RequestMapping(value = "/question/{questionId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResponse getAnswersOfQuestion(@PathVariable long questionId){
+        return new ApiResponse(HttpStatus.ACCEPTED, this.answerDAO.getByQuestionId(questionId));
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ApiResponse get(@PathVariable long id){
@@ -76,7 +82,7 @@ public class AnswerController {
         Answer answer = this.answerDAO.save(newAnswer);
         return new ApiResponse(HttpStatus.ACCEPTED, answer);
     }
-    }
+}
 
 
 //    @RestController
