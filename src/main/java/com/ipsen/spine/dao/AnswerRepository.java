@@ -1,6 +1,6 @@
-package com.example.damngirl4.dao;
+package com.ipsen.spine.dao;
 
-import com.example.damngirl4.model.Answer;
+import com.ipsen.spine.model.Answer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

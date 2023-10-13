@@ -1,4 +1,4 @@
-package com.example.damngirl4.config;
+package com.ipsen.spine.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

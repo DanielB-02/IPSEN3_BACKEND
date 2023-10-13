@@ -1,4 +1,4 @@
-package com.example.damngirl4.model;
+package com.ipsen.spine.model;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,7 +1,7 @@
-package com.example.damngirl4.dao;
+package com.ipsen.spine.dao;
 
-import com.example.damngirl4.exception.NotFoundException;
-import com.example.damngirl4.model.Answer;
+import com.ipsen.spine.exception.NotFoundException;
+import com.ipsen.spine.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,5 @@
-package com.example.damngirl4.model;
+package com.ipsen.spine.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity

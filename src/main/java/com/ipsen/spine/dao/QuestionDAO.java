@@ -1,13 +1,10 @@
-package com.example.damngirl4.dao;
+package com.ipsen.spine.dao;
 
-import com.example.damngirl4.exception.NotFoundException;
-import com.example.damngirl4.model.ApiResponse;
-import com.example.damngirl4.model.Question;
+import com.ipsen.spine.exception.NotFoundException;
+import com.ipsen.spine.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component

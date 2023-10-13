@@ -1,16 +1,14 @@
-package com.example.damngirl4.controller;
+package com.ipsen.spine.controller;
 
 
-import com.example.damngirl4.dao.QuestionDAO;
-import com.example.damngirl4.exception.NotFoundException;
-import com.example.damngirl4.model.Answer;
-import com.example.damngirl4.model.ApiResponse;
-import com.example.damngirl4.model.Question;
+import com.ipsen.spine.dao.QuestionDAO;
+import com.ipsen.spine.exception.NotFoundException;
+import com.ipsen.spine.model.ApiResponse;
+import com.ipsen.spine.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

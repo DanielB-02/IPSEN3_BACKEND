@@ -1,10 +1,10 @@
-package com.example.damngirl4;
+package com.ipsen.spine;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Damngirl4ApplicationTests {
+class IpsenSpineApplicationTests {
 
     @Test
     void contextLoads() {
