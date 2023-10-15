@@ -1,4 +1,4 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.repository;
 
 import com.ipsen.spine.model.Answer;
 import org.springframework.data.repository.CrudRepository;

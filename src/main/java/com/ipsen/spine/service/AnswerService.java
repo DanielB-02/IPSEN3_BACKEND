@@ -1,5 +1,6 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.service;
 
+import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AnswerDAO {
+public class AnswerService {
 
     @Autowired
     private AnswerRepository answerRepository;
