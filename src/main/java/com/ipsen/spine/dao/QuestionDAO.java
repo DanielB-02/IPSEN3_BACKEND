@@ -1,4 +1,4 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.dao;
 
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Question;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class QuestionService {
+public class QuestionDAO {
 
     @Autowired
     private QuestionRepository questionRepository;

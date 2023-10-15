@@ -1,4 +1,4 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.dao;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtService {
+public class JwtDAO {
     @Value("${token.signing.key}")
     private String jwtSigningKey;
     public String extractUserName(String token) {

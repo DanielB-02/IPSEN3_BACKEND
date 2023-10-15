@@ -1,6 +1,6 @@
 package com.ipsen.spine.controller;
 
-import com.ipsen.spine.service.AdminService;
+import com.ipsen.spine.dao.AdminDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @Autowired
-    private AdminService adminService;
+    private AdminDAO adminService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

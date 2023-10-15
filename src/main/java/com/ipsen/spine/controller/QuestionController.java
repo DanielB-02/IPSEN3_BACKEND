@@ -4,7 +4,7 @@ package com.ipsen.spine.controller;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.ApiResponse;
 import com.ipsen.spine.model.Question;
-import com.ipsen.spine.service.QuestionService;
+import com.ipsen.spine.dao.QuestionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public class QuestionController {
 
     @Autowired
-    private QuestionService questionService;
+    private QuestionDAO questionService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody

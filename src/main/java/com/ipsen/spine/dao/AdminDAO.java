@@ -1,10 +1,10 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.dao;
 
 import com.ipsen.spine.security.AdminSecurity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminService {
+public class AdminDAO {
 
     @AdminSecurity
     public String youAreAnAdmin() {

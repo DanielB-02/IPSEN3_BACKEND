@@ -1,4 +1,4 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.dao;
 
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AnswerService {
+public class AnswerDAO {
 
     @Autowired
     private AnswerRepository answerRepository;

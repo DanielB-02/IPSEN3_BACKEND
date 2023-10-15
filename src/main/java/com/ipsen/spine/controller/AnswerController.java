@@ -3,7 +3,7 @@ package com.ipsen.spine.controller;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.ApiResponse;
-import com.ipsen.spine.service.AnswerService;
+import com.ipsen.spine.dao.AnswerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/answer")
 public class AnswerController {
     @Autowired
-    private AnswerService answerService;
+    private AnswerDAO answerService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody

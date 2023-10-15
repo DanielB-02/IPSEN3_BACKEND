@@ -1,7 +1,7 @@
 package com.ipsen.spine.config;
 
-import com.ipsen.spine.service.JwtService;
-import com.ipsen.spine.service.UserService;
+import com.ipsen.spine.dao.JwtDAO;
+import com.ipsen.spine.dao.UserDAO;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,8 +22,8 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final JwtService jwtService;
-    private final UserService userService;
+    private final JwtDAO jwtService;
+    private final UserDAO userService;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
             @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
