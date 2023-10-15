@@ -94,6 +94,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <useTestClasspath>true</useTestClasspath>
+                    <directories>
+                        <directory>${project.build.testOutputDirectory}</directory>
+                    </directories>
+                </configuration>
             </plugin>
         </plugins>
     </build>

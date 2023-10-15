@@ -1,8 +1,8 @@
 package com.ipsen.spine.service;
 
-import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
+import com.ipsen.spine.repository.AnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
