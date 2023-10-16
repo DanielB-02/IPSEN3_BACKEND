@@ -2,8 +2,8 @@ package com.ipsen.spine.controller;
 
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
-import com.ipsen.spine.dao.AnswerDAO;
 import com.ipsen.spine.model.ApiResponse;
+import com.ipsen.spine.dao.AnswerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/answer")
 public class AnswerController {
     @Autowired
-    private AnswerDAO answerDAO;
+    private AnswerDAO answerService;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public ApiResponse all(){
-        return new ApiResponse(HttpStatus.ACCEPTED, this.answerDAO.all());
+        return new ApiResponse(HttpStatus.ACCEPTED, this.answerService.all());
     }
 
     @RequestMapping(value = "/question/{questionId}", method = RequestMethod.GET)
     @ResponseBody
     public ApiResponse getAnswersOfQuestion(@PathVariable long questionId){
-        return new ApiResponse(HttpStatus.ACCEPTED, this.answerDAO.getByQuestionId(questionId));
+        return new ApiResponse(HttpStatus.ACCEPTED, this.answerService.getByQuestionId(questionId));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -31,7 +31,7 @@ public class AnswerController {
     public ApiResponse get(@PathVariable long id){
         Answer answer;
         try {
-            answer = this.answerDAO.getById(id);
+            answer = this.answerService.getById(id);
         } catch(NotFoundException exception) {
             return new ApiResponse(HttpStatus.NOT_FOUND, "No post with that id");
         }
@@ -43,7 +43,7 @@ public class AnswerController {
     @ResponseBody
     public ApiResponse replace(@RequestBody Answer answer, @PathVariable long id){
         try{
-            this.answerDAO.replace(answer, id);
+            this.answerService.replace(answer, id);
         } catch(NotFoundException exception){
             return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
         }
@@ -55,7 +55,7 @@ public class AnswerController {
     @ResponseBody
     public ApiResponse update(@RequestBody Answer answer, @PathVariable long id){
         try{
-            this.answerDAO.update(answer, id);
+            this.answerService.update(answer, id);
         } catch(NotFoundException exception){
             return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
         }
@@ -67,7 +67,7 @@ public class AnswerController {
     @ResponseBody
     public ApiResponse delete(@PathVariable long id){
         try{
-            this.answerDAO.delete(id);
+            this.answerService.delete(id);
         } catch(NotFoundException exception){
             return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
         }
@@ -78,7 +78,7 @@ public class AnswerController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     public ApiResponse save(@RequestBody Answer newAnswer){
-        Answer answer = this.answerDAO.save(newAnswer);
+        Answer answer = this.answerService.save(newAnswer);
         return new ApiResponse(HttpStatus.ACCEPTED, answer);
     }
 }

@@ -2,6 +2,9 @@ package com.ipsen.spine.dao;
 
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Question;
+import com.ipsen.spine.repository.QuestionRepository;
+import com.ipsen.spine.security.FicterSecurity;
+import com.ipsen.spine.security.ReadOnlySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +20,17 @@ public class QuestionDAO {
         Question question = this.questionRepository.save(newQuestion);
         return question;
     }
-
+    @FicterSecurity
     public Iterable<Question> readAll(){
         return questionRepository.findAll();
     }
 
+    @ReadOnlySecurity
     public Optional<Question> readSingle(Long id){
         return questionRepository.findById(id);
     }
 
+    @FicterSecurity
     public Question update(Long id, Question newQuestion){
         Optional<Question> fetchedQuestion = questionRepository.findById(id);
         if(fetchedQuestion.isEmpty()){
@@ -36,6 +41,7 @@ public class QuestionDAO {
         return questionRepository.save(question);
     }
 
+    @FicterSecurity
     public void delete(Long id){
         if (!questionRepository.existsById(id)) {
             throw new NotFoundException("Post with id: " + id + " not found");
