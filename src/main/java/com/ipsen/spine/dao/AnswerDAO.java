@@ -62,21 +62,6 @@ public class AnswerDAO {
     }
 
     @FicterSecurity
-    public Answer update(Answer updatedAnswer, long id) throws NotFoundException{
-        Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
-
-        if(optionalAnswer.isEmpty()){
-            throw new NotFoundException("Post with id: " + id + " not found");
-        }
-
-        Answer currentAnswer = optionalAnswer.get();
-        currentAnswer.setTextAnswer(updatedAnswer.getTextAnswer());
-
-        this.answerRepository.save(currentAnswer);
-        return currentAnswer;
-    }
-
-    @FicterSecurity
     public void delete(long id) throws NotFoundException{
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
 

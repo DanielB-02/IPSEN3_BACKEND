@@ -54,13 +54,7 @@ public class AnswerController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseBody
     public ApiResponse update(@RequestBody Answer answer, @PathVariable long id){
-        try{
-            this.answerService.update(answer, id);
-        } catch(NotFoundException exception){
-            return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
-
-        return new ApiResponse(HttpStatus.ACCEPTED, "You updated comment: " + answer.getId() + " successfully.");
+        return replace(answer, id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
