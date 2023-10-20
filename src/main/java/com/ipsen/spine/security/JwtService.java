@@ -1,4 +1,4 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

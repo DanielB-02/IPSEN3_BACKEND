@@ -1,4 +1,4 @@
-package com.ipsen.spine.service;
+package com.ipsen.spine.security;
 
 import com.ipsen.spine.controller.vo.JwtAuthenticationResponse;
 import com.ipsen.spine.controller.vo.SignUpRequest;

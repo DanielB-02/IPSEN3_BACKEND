@@ -3,7 +3,7 @@ package com.ipsen.spine.controller;
 import com.ipsen.spine.controller.vo.JwtAuthenticationResponse;
 import com.ipsen.spine.controller.vo.SignUpRequest;
 import com.ipsen.spine.controller.vo.SigninRequest;
-import com.ipsen.spine.service.AuthenticationService;
+import com.ipsen.spine.security.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.service;
 
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class QuestionDAO {
+public class QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -28,8 +28,12 @@ public class QuestionDAO {
     }
 
     @ReadOnlySecurity
-    public Optional<Question> readSingle(Long id){
-        return questionRepository.findById(id);
+    public Question readSingle(Long id){
+        Optional<Question> question = questionRepository.findById(id);
+        if (question.isEmpty()) {
+            throw new NotFoundException("Question with ID " + id + " not found");
+        }
+        return question.get();
     }
 
     @FicterSecurity

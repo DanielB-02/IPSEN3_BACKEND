@@ -4,7 +4,7 @@ package com.ipsen.spine.controller;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.ApiResponse;
 import com.ipsen.spine.model.Question;
-import com.ipsen.spine.dao.QuestionDAO;
+import com.ipsen.spine.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +16,11 @@ import java.util.Optional;
 public class QuestionController {
 
     @Autowired
-    private QuestionDAO questionService;
+    private QuestionService questionService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    @ResponseBody
-    public ApiResponse save(@RequestBody Question newQuestion){
-        Question question = this.questionService.save(newQuestion);
-        return new ApiResponse(HttpStatus.ACCEPTED, question);
+    public Question save(@RequestBody Question newQuestion){
+        return this.questionService.save(newQuestion);
     }
 
     @RequestMapping(value = "/platform/{platformId}", method = RequestMethod.GET)
@@ -32,43 +30,22 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    @ResponseBody
-    public ApiResponse readAll(){
-        Iterable<Question> questions = questionService.readAll();
-        return new ApiResponse(HttpStatus.ACCEPTED, questions);
+    public Iterable<Question> readAll(){
+        return questionService.readAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ApiResponse readSingle(@PathVariable long id){
-        Optional<Question> question = this.questionService.readSingle(id);
-        if (question.isEmpty()) {
-            return new ApiResponse(HttpStatus.NOT_FOUND, "No post with that id");
-        } else {
-            return new ApiResponse(HttpStatus.ACCEPTED, question.get());
-        }
+    public Question readSingle(@PathVariable long id){
+        return this.questionService.readSingle(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ApiResponse update(@PathVariable long id, @RequestBody Question newQuestion){
-        Question question;
-        try{
-            question = this.questionService.update(id, newQuestion);
-        } catch(NotFoundException exception){
-            return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
-        return new ApiResponse(HttpStatus.ACCEPTED, question, "You replaced question: " + question.getId() + " successfully.");
+    public Question update(@PathVariable long id, @RequestBody Question newQuestion){
+        return this.questionService.update(id, newQuestion);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ApiResponse delete(@PathVariable long id){
-        try{
-            this.questionService.delete(id);
-        } catch(NotFoundException exception){
-            return new ApiResponse(HttpStatus.NOT_FOUND, exception.getMessage());
-        }
-        return new ApiResponse(HttpStatus.ACCEPTED, "You deleted question: " + id);
+    public void delete(@PathVariable long id){
+        this.questionService.delete(id);
     }
 }

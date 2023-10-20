@@ -1,4 +1,4 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.service;
 
 import com.ipsen.spine.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserDAO implements UserDetailsService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
