@@ -29,12 +29,4 @@ public class Question {
         this.textQuestion = textQuestion;
     }
 
-//    public Answer getAnswer() {
-//        return answer;
-//    }
-
-//    public void setAnswer(Answer answer) {
-//        this.answer = answer;
-//    }
-
 }

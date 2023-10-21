@@ -1,5 +1,6 @@
 package com.ipsen.spine.service;
 
+import com.ipsen.spine.controller.vo.QuestionForm;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.Question;
@@ -18,10 +19,6 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public Question save(Question newQuestion){
-        Question question = this.questionRepository.save(newQuestion);
-        return question;
-    }
     @FicterSecurity
     public Iterable<Question> readAll(){
         return questionRepository.findAll();
@@ -37,14 +34,22 @@ public class QuestionService {
     }
 
     @FicterSecurity
-    public Question update(Long id, Question newQuestion){
+    public Question create(QuestionForm questionForm){
+        return save(questionForm, new Question());
+    }
+
+    @FicterSecurity
+    public Question update(Long id, QuestionForm questionForm){
         Optional<Question> fetchedQuestion = questionRepository.findById(id);
         if(fetchedQuestion.isEmpty()){
             throw new NotFoundException("Post with id: " + id + " not found");
         }
-        Question question = fetchedQuestion.get();
-        question.setTextQuestion(newQuestion.getTextQuestion());
-        return questionRepository.save(question);
+        return save(questionForm, fetchedQuestion.get());
+    }
+
+    private Question save(QuestionForm questionForm, Question question) {
+        question.setTextQuestion(questionForm.textQuestion);
+        return this.questionRepository.save(question);
     }
 
     @FicterSecurity

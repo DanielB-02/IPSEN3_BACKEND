@@ -1,15 +1,12 @@
 package com.ipsen.spine.controller;
 
 
-import com.ipsen.spine.exception.NotFoundException;
-import com.ipsen.spine.model.ApiResponse;
+import com.ipsen.spine.controller.vo.QuestionForm;
 import com.ipsen.spine.model.Question;
 import com.ipsen.spine.service.QuestionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/question")
@@ -19,8 +16,13 @@ public class QuestionController {
     private QuestionService questionService;
 
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public Question save(@RequestBody Question newQuestion){
-        return this.questionService.save(newQuestion);
+    public Question create(@RequestBody @Valid QuestionForm newQuestion){
+        return this.questionService.create(newQuestion);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Question update(@PathVariable long id, @RequestBody @Valid QuestionForm newQuestion){
+        return this.questionService.update(id, newQuestion);
     }
 
     @RequestMapping(value = "/platform/{platformId}", method = RequestMethod.GET)
@@ -37,11 +39,6 @@ public class QuestionController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Question readSingle(@PathVariable long id){
         return this.questionService.readSingle(id);
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Question update(@PathVariable long id, @RequestBody Question newQuestion){
-        return this.questionService.update(id, newQuestion);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
