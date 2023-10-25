@@ -14,6 +14,8 @@ public class Answer {
     @ManyToOne
     private Question question;
 
+
+
     public Long getId() {
         return id;
     }

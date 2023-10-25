@@ -10,6 +10,9 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String textQuestion;
+
+    @ManyToOne
+    private Platform platform;
 //    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 //    @JsonManagedReference
 //    private Answer answer;

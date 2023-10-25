@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 
 public interface PlatformRepository  extends CrudRepository<Platform, Long>  {
-    List<Platform> findByPlatformId(long platformId);
 }
