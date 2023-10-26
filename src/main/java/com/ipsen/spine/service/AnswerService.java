@@ -1,7 +1,9 @@
 package com.ipsen.spine.service;
 
+import com.ipsen.spine.controller.vo.AnswerForm;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
+import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.security.FicterSecurity;
@@ -45,23 +47,27 @@ public class AnswerService {
     }
 
     @FicterSecurity
-    public Answer save(Answer newAnswer){
-        return this.answerRepository.save(newAnswer);
+    public Answer create(AnswerForm form){
+        return save(form, new Answer());
     }
 
     @FicterSecurity
-    public Answer replace(Answer newAnswer, long id) throws NotFoundException{
+    public Answer update(AnswerForm form, long id) throws NotFoundException{
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
-
         if(optionalAnswer.isEmpty()){
             throw new NotFoundException("Post with id: " + id + " not found");
         }
+        return save(form, optionalAnswer.get());
+    }
 
-        Answer currentAnswer = optionalAnswer.get();
-        currentAnswer.setTextAnswer(newAnswer.getTextAnswer());
-
-        this.answerRepository.save(currentAnswer);
-        return currentAnswer;
+    private Answer save(AnswerForm form, Answer entityToSave) {
+        Optional<Question> fetchedQuestion = questionRepository.findById(form.questionId);
+        if(fetchedQuestion.isEmpty()){
+            throw new NotFoundException("Question with id: " + form.questionId + " not found");
+        }
+        entityToSave.setQuestion(fetchedQuestion.get());
+        entityToSave.setTextAnswer(form.textAnswer);
+        return this.answerRepository.save(entityToSave);
     }
 
     @FicterSecurity

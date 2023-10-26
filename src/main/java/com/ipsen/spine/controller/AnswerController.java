@@ -1,5 +1,6 @@
 package com.ipsen.spine.controller;
 
+import com.ipsen.spine.controller.vo.AnswerForm;
 import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +29,19 @@ public class AnswerController {
         return this.answerService.getById(id);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Answer replace(@RequestBody Answer answer, @PathVariable long id){
-        return this.answerService.replace(answer, id);
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Answer create(@RequestBody AnswerForm form){
+        return this.answerService.create(form);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
-    public Answer update(@RequestBody Answer answer, @PathVariable long id){
-        return replace(answer, id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Answer replace(@RequestBody AnswerForm form, @PathVariable long id){
+        return this.answerService.update(form, id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable long id){
         this.answerService.delete(id);
-    }
-
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public Answer save(@RequestBody Answer newAnswer){
-        return this.answerService.save(newAnswer);
     }
 }
 

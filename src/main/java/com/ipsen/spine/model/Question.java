@@ -26,4 +26,11 @@ public class Question {
         this.textQuestion = textQuestion;
     }
 
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
 }
