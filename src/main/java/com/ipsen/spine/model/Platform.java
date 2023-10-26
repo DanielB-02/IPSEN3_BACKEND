@@ -11,10 +11,6 @@ public class Platform {
     private Long id;
     private String platformName;
 
-//    private set<Answer> answerset;
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//    @JsonManagedReference
-//    private Answer answer;
 
     public Long getId() {
             return id;

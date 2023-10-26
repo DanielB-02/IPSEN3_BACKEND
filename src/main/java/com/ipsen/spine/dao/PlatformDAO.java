@@ -17,6 +17,7 @@ public class PlatformDAO {
     @Autowired
     private PlatformRepository platformRepository;
 
+    @FicterSecurity
     public Platform save(Platform newPlatform){
         Platform platform = this.platformRepository.save(newPlatform);
         return platform;

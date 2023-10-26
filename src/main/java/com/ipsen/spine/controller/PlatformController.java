@@ -36,7 +36,7 @@ public class PlatformController {
     public ApiResponse readSingle(@PathVariable long id){
         Optional<Platform> platform = this.platformService.readSingle(id);
         if (platform.isEmpty()) {
-            return new ApiResponse(HttpStatus.NOT_FOUND, "No post with that id");
+            return new ApiResponse(HttpStatus.NOT_FOUND, "No platform with that id");
         } else {
             return new ApiResponse(HttpStatus.ACCEPTED, platform.get());
         }
