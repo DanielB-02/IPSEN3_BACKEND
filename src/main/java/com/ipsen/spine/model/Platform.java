@@ -5,13 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "platform")
 public class Platform {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String platformName;
-
-
     public Long getId() {
             return id;
         }

@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/question")
 public class QuestionController {
@@ -26,9 +28,8 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/platform/{platformId}", method = RequestMethod.GET)
-    @ResponseBody
-    public ApiResponse getQuestionsOfPlatform(@PathVariable long platformId){
-        return new ApiResponse(HttpStatus.ACCEPTED, this.questionService.getByPlatformId(platformId));
+    public List<Question> getQuestionsOfPlatform(@PathVariable long platformId){
+        return this.questionService.getByPlatformId(platformId);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

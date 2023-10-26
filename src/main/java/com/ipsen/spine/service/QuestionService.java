@@ -2,7 +2,6 @@ package com.ipsen.spine.service;
 
 import com.ipsen.spine.controller.vo.QuestionForm;
 import com.ipsen.spine.exception.NotFoundException;
-import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.security.FicterSecurity;

@@ -13,9 +13,6 @@ public class Question {
 
     @ManyToOne
     private Platform platform;
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//    @JsonManagedReference
-//    private Answer answer;
 
     public Long getId() {
         return id;

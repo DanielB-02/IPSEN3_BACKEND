@@ -1,7 +1,6 @@
 package com.ipsen.spine.controller;
 
 import com.ipsen.spine.model.Answer;
-import com.ipsen.spine.model.Question;
 import com.ipsen.spine.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
