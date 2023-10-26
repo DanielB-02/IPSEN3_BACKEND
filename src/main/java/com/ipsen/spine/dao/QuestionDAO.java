@@ -1,6 +1,7 @@
 package com.ipsen.spine.dao;
 
 import com.ipsen.spine.exception.NotFoundException;
+import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.security.FicterSecurity;
@@ -8,6 +9,7 @@ import com.ipsen.spine.security.ReadOnlySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -39,6 +41,11 @@ public class QuestionDAO {
         Question question = fetchedQuestion.get();
         question.setTextQuestion(newQuestion.getTextQuestion());
         return questionRepository.save(question);
+    }
+
+    @FicterSecurity
+    public List<Question> getByPlatformId(Long platformId) {
+        return this.questionRepository.findByPlatformId(platformId);
     }
 
     @FicterSecurity

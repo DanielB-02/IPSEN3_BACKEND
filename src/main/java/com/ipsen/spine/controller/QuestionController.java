@@ -25,6 +25,12 @@ public class QuestionController {
         return new ApiResponse(HttpStatus.ACCEPTED, question);
     }
 
+    @RequestMapping(value = "/platform/{platformId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ApiResponse getQuestionsOfPlatform(@PathVariable long platformId){
+        return new ApiResponse(HttpStatus.ACCEPTED, this.questionService.getByPlatformId(platformId));
+    }
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public ApiResponse readAll(){

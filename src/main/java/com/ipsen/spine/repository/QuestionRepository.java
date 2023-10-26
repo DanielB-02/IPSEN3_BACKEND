@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends CrudRepository<Question, Long> {
-    List<Answer> findByQuestionId(long questionId);
+    List<Question> findByPlatformId(long platformId);
 }
