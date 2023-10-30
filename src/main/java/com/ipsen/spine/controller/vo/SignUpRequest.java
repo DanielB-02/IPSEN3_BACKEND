@@ -1,5 +1,6 @@
 package com.ipsen.spine.controller.vo;
 
+import com.ipsen.spine.model.Role;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,4 +17,13 @@ public class SignUpRequest {
     private String email;
     @Size(min = 8)
     private String password;
+    private String role;
+
+
+    public Role getRoleEnum() {
+        if(getRole().equals("Ficter")){
+            return Role.FICTER;
+        }
+        return Role.READONLY;
+    }
 }
