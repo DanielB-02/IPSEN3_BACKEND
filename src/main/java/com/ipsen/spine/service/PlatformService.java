@@ -1,6 +1,6 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.service;
 
-
+import com.ipsen.spine.controller.vo.PlatformForm;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.repository.PlatformRepository;
@@ -12,16 +12,30 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class PlatformDAO {
+public class PlatformService {
 
     @Autowired
     private PlatformRepository platformRepository;
 
     @FicterSecurity
-    public Platform save(Platform newPlatform){
-        Platform platform = this.platformRepository.save(newPlatform);
-        return platform;
+    public Platform create(PlatformForm form){
+        return savePlatform(form, new Platform());
     }
+
+    @FicterSecurity
+    public Platform update(Long id, PlatformForm form){
+        Optional<Platform> fetchedPlatform = platformRepository.findById(id);
+        if(fetchedPlatform.isEmpty()){
+            throw new NotFoundException("Platform with id: " + id + " not found");
+        }
+        return savePlatform(form, fetchedPlatform.get());
+    }
+
+    private Platform savePlatform(PlatformForm form, Platform entityToSave) {
+        entityToSave.setPlatformName(form.platformName);
+        return this.platformRepository.save(entityToSave);
+    }
+
     @FicterSecurity
     public Iterable<Platform> readAll(){
         return platformRepository.findAll();
@@ -33,20 +47,9 @@ public class PlatformDAO {
     }
 
     @FicterSecurity
-    public Platform update(Long id, Platform newPlatform){
-        Optional<Platform> fetchedPlatform = platformRepository.findById(id);
-        if(fetchedPlatform.isEmpty()){
-            throw new NotFoundException("Post with id: " + id + " not found");
-        }
-        Platform platform = fetchedPlatform.get();
-        platform.setPlatformName(newPlatform.getPlatformName());
-        return platformRepository.save(platform);
-    }
-
-    @FicterSecurity
     public void delete(Long id){
         if (!platformRepository.existsById(id)) {
-            throw new NotFoundException("Post with id: " + id + " not found");
+            throw new NotFoundException("Platform with id: " + id + " not found");
         }
         platformRepository.deleteById(id);
     }

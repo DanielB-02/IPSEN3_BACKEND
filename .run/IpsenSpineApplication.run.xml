@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="IpsenSpineApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <option name="ACTIVE_PROFILES" />
+    <option name="ACTIVE_PROFILES" value="personal" />
     <module name="spine" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.ipsen.spine.IpsenSpineApplication" />
     <option name="VM_PARAMETERS" value="-cp $Classpath$:/src/test/resources" />

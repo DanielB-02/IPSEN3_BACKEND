@@ -1,31 +1,37 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.service;
 
+import com.ipsen.spine.controller.vo.AnswerForm;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Answer;
+import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.AnswerRepository;
+import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.security.FicterSecurity;
 import com.ipsen.spine.security.ReadOnlySecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class AnswerDAO {
+public class AnswerService {
 
     @Autowired
     private AnswerRepository answerRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @FicterSecurity
-    public ArrayList<Answer> all(){
-        ArrayList<Answer> allAnswers = (ArrayList<Answer>) this.answerRepository.findAll();
-        return allAnswers;
+    public Iterable<Answer> all(){
+        return this.answerRepository.findAll();
     }
 
     @FicterSecurity
     public List<Answer> getByQuestionId(Long questionId) {
+        if (!questionRepository.existsById(questionId)) {
+            throw new NotFoundException("Question with id " + questionId + " not found");
+        }
         return this.answerRepository.findByQuestionId(questionId);
     }
 
@@ -41,39 +47,27 @@ public class AnswerDAO {
     }
 
     @FicterSecurity
-    public Answer save(Answer newAnswer){
-        Answer answer = this.answerRepository.save(newAnswer);
-        return answer;
+    public Answer create(AnswerForm form){
+        return save(form, new Answer());
     }
 
     @FicterSecurity
-    public Answer replace(Answer newAnswer, long id) throws NotFoundException{
+    public Answer update(AnswerForm form, long id) throws NotFoundException{
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
-
         if(optionalAnswer.isEmpty()){
             throw new NotFoundException("Post with id: " + id + " not found");
         }
-
-        Answer currentAnswer = optionalAnswer.get();
-        currentAnswer.setTextAnswer(newAnswer.getTextAnswer());
-
-        this.answerRepository.save(currentAnswer);
-        return currentAnswer;
+        return save(form, optionalAnswer.get());
     }
 
-    @FicterSecurity
-    public Answer update(Answer updatedAnswer, long id) throws NotFoundException{
-        Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
-
-        if(optionalAnswer.isEmpty()){
-            throw new NotFoundException("Post with id: " + id + " not found");
+    private Answer save(AnswerForm form, Answer entityToSave) {
+        Optional<Question> fetchedQuestion = questionRepository.findById(form.questionId);
+        if(fetchedQuestion.isEmpty()){
+            throw new NotFoundException("Question with id: " + form.questionId + " not found");
         }
-
-        Answer currentAnswer = optionalAnswer.get();
-        currentAnswer.setTextAnswer(updatedAnswer.getTextAnswer());
-
-        this.answerRepository.save(currentAnswer);
-        return currentAnswer;
+        entityToSave.setQuestion(fetchedQuestion.get());
+        entityToSave.setTextAnswer(form.textAnswer);
+        return this.answerRepository.save(entityToSave);
     }
 
     @FicterSecurity

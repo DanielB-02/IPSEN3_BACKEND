@@ -13,9 +13,6 @@ public class Question {
 
     @ManyToOne
     private Platform platform;
-//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-//    @JsonManagedReference
-//    private Answer answer;
 
     public Long getId() {
         return id;
@@ -29,12 +26,11 @@ public class Question {
         this.textQuestion = textQuestion;
     }
 
-//    public Answer getAnswer() {
-//        return answer;
-//    }
+    public Platform getPlatform() {
+        return platform;
+    }
 
-//    public void setAnswer(Answer answer) {
-//        this.answer = answer;
-//    }
-
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
 }

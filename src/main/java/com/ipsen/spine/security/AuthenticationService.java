@@ -1,4 +1,4 @@
-package com.ipsen.spine.dao;
+package com.ipsen.spine.security;
 
 import com.ipsen.spine.controller.vo.JwtAuthenticationResponse;
 import com.ipsen.spine.controller.vo.SignUpRequest;
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationDAO {
+public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtDAO jwtService;
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public JwtAuthenticationResponse signup(SignUpRequest request) {
