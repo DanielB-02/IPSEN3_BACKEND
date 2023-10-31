@@ -15,7 +15,7 @@ public class SignupService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-//    @AdminSecurity
+    @AdminSecurity
     public User signup(SignUpRequest request) {
         var user = User.builder()
                 .firstName(request.getFirstName())
