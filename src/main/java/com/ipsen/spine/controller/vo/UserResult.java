@@ -4,6 +4,7 @@ import com.ipsen.spine.model.Role;
 import com.ipsen.spine.model.User;
 
 public class UserResult {
+    public Long id;
     public String firstName;
     public String lastName;
     public String email;
@@ -11,6 +12,7 @@ public class UserResult {
 
     public static UserResult create(User user) {
         UserResult result = new UserResult();
+        result.id = user.getId();
         result.email = user.getEmail();
         result.firstName = user.getFirstName();
         result.lastName = user.getLastName();
