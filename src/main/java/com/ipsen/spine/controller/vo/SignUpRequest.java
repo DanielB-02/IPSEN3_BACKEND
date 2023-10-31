@@ -16,4 +16,5 @@ public class SignUpRequest {
     private String email;
     @Size(min = 8)
     private String password;
+    private boolean fictRole;
 }
