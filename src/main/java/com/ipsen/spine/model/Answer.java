@@ -4,17 +4,15 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "answer")
-
 public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String textAnswer;
+    private int score;
     @ManyToOne
     private Question question;
-
-
 
     public Long getId() {
         return id;
@@ -35,14 +33,12 @@ public class Answer {
     public void setQuestion(Question question) {
         this.question = question;
     }
-//    public Question getQuestion() {
-//        return question;
-//    }
 
-//    public void setQuestion(Question question) {
-//        this.question = question;
-//    }
+    public int getScore() {
+        return score;
+    }
 
-
-
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
