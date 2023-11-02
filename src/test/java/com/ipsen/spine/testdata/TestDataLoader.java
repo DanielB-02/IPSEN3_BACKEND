@@ -7,7 +7,6 @@ import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +75,7 @@ public class TestDataLoader {
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
-    @Test
+
     @PostConstruct
     private void saveTestData() {
         createUser("Arie", "Administrator", "admin@spine.com", "12345", ADMIN);
