@@ -1,12 +1,14 @@
 package com.ipsen.spine.controller;
 
 import com.ipsen.spine.controller.vo.PlatformForm;
+import com.ipsen.spine.controller.vo.PlatformScoreResult;
 import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.service.PlatformService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +26,11 @@ public class PlatformController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Platform> readAll(){
         return this.platformService.readAll();
+    }
+
+    @RequestMapping(value = "/sorted", method = RequestMethod.GET)
+    public List<PlatformScoreResult> readAllSortByScore(){
+        return this.platformService.readAllSortByScore();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
