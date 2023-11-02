@@ -7,6 +7,7 @@ import com.ipsen.spine.repository.QuestionRepository;
 import com.ipsen.spine.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ import static com.ipsen.spine.model.Role.*;
 
 @Component
 @RequiredArgsConstructor
+@Profile("testdata")
 public class TestDataLoader {
     private static final List<String> QUESTIONS = List.of(
             "Jurisprudentie",
