@@ -33,6 +33,11 @@ public class PlatformController {
         return this.platformService.readAllSortByScore();
     }
 
+    @RequestMapping(value = "/sortedDesc", method = RequestMethod.GET)
+    public List<PlatformScoreResult> readAllSortByScoreDesc(){
+        return this.platformService.readAllSortByScoreDesc();
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Optional<Platform> readSingle(@PathVariable long id){
         return this.platformService.readSingle(id);

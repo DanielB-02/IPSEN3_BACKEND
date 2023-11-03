@@ -41,7 +41,7 @@ public class PlatformService {
         return this.platformRepository.save(entityToSave);
     }
 
-    @FicterSecurity
+
     public Iterable<Platform> readAll(){
         return platformRepository.findAll();
     }
@@ -75,6 +75,25 @@ public class PlatformService {
         }
         // Sort the list in order of the scores
         platformResults.sort((o1, o2) -> o2.score - o1.score);
+        return platformResults;
+    }
+
+    public List<PlatformScoreResult> readAllSortByScoreDesc() {
+        List<PlatformScoreResult> platformResults = new ArrayList<>();
+        // Gather the platforms with their scores
+        for (Platform platform : platformRepository.findAll()) {
+            int score = 0;
+            for (Answer answer : answerRepository.findByQuestionPlatform(platform)) {
+                score += answer.getScore();
+            }
+            PlatformScoreResult result = new PlatformScoreResult();
+            result.id = platform.getId();
+            result.platformName = platform.getPlatformName();
+            result.score = score;
+            platformResults.add(result);
+        }
+        // Sort the list in order of the scores
+        platformResults.sort(Comparator.comparingInt(o -> o.score));
         return platformResults;
     }
 }

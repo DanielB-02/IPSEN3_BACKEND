@@ -39,7 +39,7 @@ public class UserService implements UserDetailsService {
         this.userRepository.delete(user);
     }
 
-    @AdminSecurity
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
