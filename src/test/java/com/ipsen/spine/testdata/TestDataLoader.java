@@ -35,8 +35,8 @@ public class TestDataLoader {
                     new AnswerScore(1, "Ja, 2023"),
                     new AnswerScore(0, "Nee"),
                     new AnswerScore(1, "2022-2023, ronselen"),
-                    new AnswerScore(1, "[The British Journal of Social Work, 7-9-2023, Engels, https://academic.oup.com/bjsw/advance-article/doi/10.1093/bjsw/bcad201/7263182]"),
-                    new AnswerScore(1, "[NRC Handelsblad, 6-6-2023,Nederlands,https://www.nrc.nl/nieuws/2023/06/06/bescherm-jongeren-tegen-sociale-media-opgroeien-zonder-cyberstress-is-al-ingewikkeld-zat-a4166484]")
+                    new AnswerScore(1, "The British Journal of Social Work, 7-9-2023, Engels, https://academic.oup.com/bjsw/advance-article/doi/10.1093/bjsw/bcad201/7263182]"),
+                    new AnswerScore(1, "NRC Handelsblad, 6-6-2023, Nederlands, https://www.nrc.nl/nieuws/2023/06/06/bescherm-jongeren-tegen-sociale-media-opgroeien-zonder-cyberstress-is-al-ingewikkeld-zat-a4166484]")
             ),
             "Facebook", List.of(
                     new AnswerScore(3, "nvt, feit (seksuele uitbuiting, criminele uitbuiting, seksueel geweld), rol technologie (ronselen, controle, aanbod]"),
@@ -69,7 +69,48 @@ public class TestDataLoader {
                     new AnswerScore(0, "Nvt"),
                     new AnswerScore(1, "International Journal of Environmental Research and Public Health, 18-8-2021, Engels, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8393543/"),
                     new AnswerScore(1, "Psychiatric Times, 22-3-2022, Engels, https://www.psychiatrictimes.com/view/tiktok-biggest-concerns-for-children-and-adolescents ")
+            ),
+            "YouTube", List.of(
+                    new AnswerScore(3, "nvt, feit (seksuele uitbuiting, criminele uitbuiting, seksueel geweld), rol technologie (ronselen, controle, aanbod]"),
+                    new AnswerScore(0, "Nee"),
+                    new AnswerScore(1, "Ja, 2021"),
+                    new AnswerScore(0, "Nvt"),
+                    new AnswerScore(1, "Social Media + Society, 17-4-2020, Engels, https://journals.sagepub.com/doi/10.1177/2056305120909474"),
+                    new AnswerScore(1, "PZC, 29-9-2023, Nederlands, https://www.pzc.nl/gent/leerlingen-staan-in-bloot-bovenlijf-op-zijn-youtube-kanaal-meer-details-bekend-over-grensoverschrijdend-gedrag-van-leerkracht-uit-destelbergen~a62f8454/")
+            ),
+            "Whatsapp", List.of(
+                    new AnswerScore(2, "nvt, rol technologie (aanbod]"),
+                    new AnswerScore(2, "Ja, 2022 en 2023"),
+                    new AnswerScore(1, "Ja, 2023"),
+                    new AnswerScore(0, "Nvt"),
+                    new AnswerScore(1, "Generation Smartphone, 2018, Duits, https://www.generationsmartphone.ch/_data/Generation-Smartphone-Projektbericht.pdf"),
+                    new AnswerScore(1, "The Guardian, 1-10-2022, Engels, https://www.theguardian.com/technology/2022/oct/01/poisonous-how-whatsapp-is-exposing-uk-school-children-to-bullying-and-harmful-content")
+            ),
+            "Wechat", List.of(
+                    new AnswerScore(3, "nvt, feit (seksuele uitbuiting, criminele uitbuiting, seksueel geweld), rol technologie (ronselen, controle, aanbod]"),
+                    new AnswerScore(0, "Nee"),
+                    new AnswerScore(1, "Ja, 2019"),
+                    new AnswerScore(0, "Nvt"),
+                    new AnswerScore(1, "BMC Geriatrics, 22-4-2022, Engels, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9023108/"),
+                    new AnswerScore(1, "RTL Nieuws, 3-3-2022, Nederlands, https://www.rtlnieuws.nl/tech/artikel/5292145/tiktok-invloed-jeugd-kinderen-jongeren")
+            ),
+            "Telegram", List.of(
+                    new AnswerScore(1, "nvt, feit (seksuele uitbuiting, seksueel geweld)]"),
+                    new AnswerScore(3, "Ja, 2021, 2022 en 2023"),
+                    new AnswerScore(2, "Ja, 2022 en 2023"),
+                    new AnswerScore(2, "2020 en 2021, ronselen"),
+                    new AnswerScore(1, "Journal of Pediatric Nursing, 6-4-2023, Engels, https://www.pediatricnursing.org/article/S0882-5963(23)00072-6/fulltext"),
+                    new AnswerScore(1, "Omroep Brabant, 27-1-2021, Nederlands, https://www.omroepbrabant.nl/nieuws/3332878/zo-jutten-jongeren-elkaar-via-telegram-op-om-te-rellen-we-gaan-popo-bureau-neuke")
+            ),
+            "Tumblr", List.of(
+                    new AnswerScore(1, "nvt, rol technologie (controle)]"),
+                    new AnswerScore(1, "Ja, 2019"),
+                    new AnswerScore(0, "Nee"),
+                    new AnswerScore(0, "Nvt"),
+                    new AnswerScore(0, "Nvt"),
+                    new AnswerScore(0, "Gabb, 29-8-2022, Engels, https://gabb.com/blog/is-tumblr-safe/")
             )
+
     );
 
     private final UserRepository userRepository;
@@ -88,7 +129,15 @@ public class TestDataLoader {
         Platform instagram = createPlatform("Instagram");
         Platform snapchat = createPlatform("Snapchat");
         Platform tiktok = createPlatform("Tiktok");
-        List<Platform> platforms = List.of(twitter, instagram, facebook, tiktok, snapchat);
+        Platform youtube = createPlatform("YouTube");
+        Platform whatsapp = createPlatform("Whatsapp");
+        Platform wechat = createPlatform("Wechat");
+        Platform telegram = createPlatform("Telegram");
+        Platform tumblr = createPlatform("Tumblr");
+
+        List<Platform> platforms = List.of(twitter, facebook, instagram, snapchat, tiktok, youtube, whatsapp, wechat, telegram,
+                tumblr
+        );
         platforms.forEach(this::createQuestionsAndAnswers);
     }
 
