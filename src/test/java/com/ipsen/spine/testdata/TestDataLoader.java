@@ -121,9 +121,9 @@ public class TestDataLoader {
 
     @PostConstruct
     private void saveTestData() {
-        createUser("Arie", "Administrator", "admin@spine.com", "12345", ADMIN);
-        createUser("Floris", "Ficter", "ficter@spine.com", "12345", FICTER);
-        createUser("Robert", "Readonly", "readonly@spine.com", "12345", READONLY);
+        createUser("Sebastiaan", "Landers", "admin@spine.com", "12345", ADMIN);
+        createUser("Shivane", "Frauenfelder", "ficter@spine.com", "12345", FICTER);
+        createUser("Floris", "Admiraal", "readonly@spine.com", "12345", READONLY);
         Platform twitter = createPlatform("Twitter");
         Platform facebook = createPlatform("Facebook");
         Platform instagram = createPlatform("Instagram");
