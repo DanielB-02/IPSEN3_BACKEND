@@ -47,6 +47,21 @@ public class PlatformServiceTest {
 
     @Test
     @Transactional
+    public void orderByScoreDesc() {
+        createPlatform("Twitter", 3, 0, 1);
+        createPlatform("Instagram", 1, 1, 1);
+        createPlatform("Snapchat", 0, 3, 3);
+
+        List<PlatformScoreResult> platforms = platformService.readAllSortByScoreDesc();
+
+        assertEquals(3, platforms.size());
+        assertEquals("Snapchat", platforms.get(2).platformName);
+        assertEquals("Twitter", platforms.get(1).platformName);
+        assertEquals("Instagram", platforms.get(0).platformName);
+    }
+
+    @Test
+    @Transactional
     public void getAnswerOfPlatform() {
         Platform platform = createPlatform("Twitter", 3);
         List<Answer> answers = answerRepository.findByQuestionPlatform(platform);
