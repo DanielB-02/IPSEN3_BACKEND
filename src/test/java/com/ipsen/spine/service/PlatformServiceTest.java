@@ -59,6 +59,13 @@ public class PlatformServiceTest {
         assertEquals("Twitter", platforms.get(1).platformName);
         assertEquals("Instagram", platforms.get(0).platformName);
     }
+    @Test
+    @Transactional
+    public void getQuestionOfPlatform(){
+        Platform platform = createPlatform("Twitter", 3);
+        List<Question> questions = questionRepository.findByPlatformId(platform.getId());
+        assertEquals(1, questions.size());
+    }
 
     @Test
     @Transactional
