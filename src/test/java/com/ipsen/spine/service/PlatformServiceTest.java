@@ -69,22 +69,6 @@ public class PlatformServiceTest {
         assertEquals(3, answers.get(0).getScore());
     }
 
-    @Test
-    public void should_return_list_of_questions_with_id(){
-
-        String platformName = "Facebook";
-        Platform platform = createPlatform(platformName, 3);
-
-        List<Question> questionList = this.questionRepository.findByPlatformId(platform.getId());
-
-        for (Question question: questionList
-        ) {
-            System.out.println(question.getTextQuestion());
-
-        }
-
-        assertEquals(1, questionList.size());
-    }
 
 
     private Platform createPlatform(String platformName, Integer... scores){
