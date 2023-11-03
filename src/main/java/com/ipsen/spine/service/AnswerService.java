@@ -22,12 +22,12 @@ public class AnswerService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @FicterSecurity
+    @ReadOnlySecurity
     public Iterable<Answer> all(){
         return this.answerRepository.findAll();
     }
 
-    @FicterSecurity
+    @ReadOnlySecurity
     public List<Answer> getByQuestionId(Long questionId) {
         if (!questionRepository.existsById(questionId)) {
             throw new NotFoundException("Question with id " + questionId + " not found");
