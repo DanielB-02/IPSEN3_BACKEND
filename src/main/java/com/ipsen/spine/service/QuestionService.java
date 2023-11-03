@@ -22,7 +22,7 @@ public class QuestionService {
     @Autowired
     private PlatformRepository platformRepository;
 
-    @FicterSecurity
+    @ReadOnlySecurity
     public Iterable<Question> readAll(){
         return questionRepository.findAll();
     }
@@ -50,6 +50,7 @@ public class QuestionService {
         return save(questionForm, fetchedQuestion.get());
     }
 
+    @FicterSecurity
     private Question save(QuestionForm form, Question question) {
         Optional<Platform> fetchedPlatform = platformRepository.findById(form.platformId);
         if(fetchedPlatform.isEmpty()){
@@ -60,7 +61,7 @@ public class QuestionService {
         return this.questionRepository.save(question);
     }
 
-    @FicterSecurity
+    @ReadOnlySecurity
     public List<Question> getByPlatformId(Long platformId) {
         return this.questionRepository.findByPlatformId(platformId);
     }
