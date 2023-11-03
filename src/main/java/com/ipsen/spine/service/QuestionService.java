@@ -17,10 +17,13 @@ import java.util.Optional;
 @Component
 public class QuestionService {
 
-    @Autowired
-    private QuestionRepository questionRepository;
-    @Autowired
-    private PlatformRepository platformRepository;
+    private final QuestionRepository questionRepository;
+    private final PlatformRepository platformRepository;
+
+    public QuestionService(QuestionRepository questionRepository, PlatformRepository platformRepository) {
+        this.questionRepository = questionRepository;
+        this.platformRepository = platformRepository;
+    }
 
     @ReadOnlySecurity
     public Iterable<Question> readAll(){
@@ -45,7 +48,7 @@ public class QuestionService {
     public Question update(Long id, QuestionForm questionForm){
         Optional<Question> fetchedQuestion = questionRepository.findById(id);
         if(fetchedQuestion.isEmpty()){
-            throw new NotFoundException("Post with id: " + id + " not found");
+            throw new NotFoundException("Question with id: " + id + " not found");
         }
         return save(questionForm, fetchedQuestion.get());
     }

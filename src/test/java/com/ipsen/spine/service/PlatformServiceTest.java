@@ -32,7 +32,7 @@ public class PlatformServiceTest {
 
     @Test
     @Transactional
-    public void orderByScore() {
+    public void order_by_score_ascending() {
         createPlatform("Twitter", 3, 0, 1);
         createPlatform("Instagram", 1, 1, 1);
         createPlatform("Snapchat", 0, 3, 3);
@@ -47,7 +47,7 @@ public class PlatformServiceTest {
 
     @Test
     @Transactional
-    public void orderByScoreDesc() {
+    public void order_by_score_descending() {
         createPlatform("Twitter", 3, 0, 1);
         createPlatform("Instagram", 1, 1, 1);
         createPlatform("Snapchat", 0, 3, 3);
@@ -62,12 +62,13 @@ public class PlatformServiceTest {
 
     @Test
     @Transactional
-    public void getAnswerOfPlatform() {
+    public void get_answer_of_platform() {
         Platform platform = createPlatform("Twitter", 3);
         List<Answer> answers = answerRepository.findByQuestionPlatform(platform);
         assertEquals(1, answers.size());
         assertEquals(3, answers.get(0).getScore());
     }
+
 
 
     private Platform createPlatform(String platformName, Integer... scores){
