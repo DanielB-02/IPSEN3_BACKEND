@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/answer")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/answer", produces = { "application/vnd.spine.api.v1+json", "application/vnd.spine.api.v2+json" })
 public class AnswerController {
     @Autowired
     private AnswerService answerService;

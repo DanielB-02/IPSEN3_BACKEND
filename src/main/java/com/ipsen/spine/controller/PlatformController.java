@@ -13,8 +13,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(value = "/platform")
-
+@RequestMapping(value = "/platform", produces = { "application/vnd.spine.api.v1+json", "application/vnd.spine.api.v2+json" })
 public class PlatformController {
     @Autowired
     private PlatformService platformService;
@@ -25,6 +24,7 @@ public class PlatformController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
+//    @RequestMapping(value = "", produces = "application/vnd.spine.api.v2+json", method = RequestMethod.GET)
     public Iterable<Platform> readAll(){
         return this.platformService.readAll();
     }
