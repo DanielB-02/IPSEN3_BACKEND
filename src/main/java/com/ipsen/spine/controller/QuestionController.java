@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/question")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(value = "/question", produces = { "application/vnd.spine.api.v1+json", "application/vnd.spine.api.v2+json" })
 public class QuestionController {
 
     @Autowired
