@@ -22,7 +22,8 @@ public class SignupService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.isFictRole() ? Role.FICTER : Role.READONLY).build();
+//                .role(request.isFictRole() ? Role.FICTER : Role.READONLY).build();
+                .build();
         return userRepository.save(user);
     }
 

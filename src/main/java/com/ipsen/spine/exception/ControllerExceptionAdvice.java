@@ -1,6 +1,7 @@
 package com.ipsen.spine.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,6 +17,14 @@ public class ControllerExceptionAdvice {
     public ErrorResult notFoundError(BadCredentialsException err) {
         err.printStackTrace();
         return new ErrorResult("Invalid email or password.");
+    }
+
+    @ExceptionHandler({
+            AccessDeniedException.class
+    })
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorResult accessDenied(AccessDeniedException err) {
+        return new ErrorResult("You do not have the permission for that operation");
     }
 
     @ExceptionHandler({
