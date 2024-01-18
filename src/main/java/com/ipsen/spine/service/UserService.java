@@ -1,12 +1,10 @@
 package com.ipsen.spine.service;
 
-import com.ipsen.spine.controller.vo.UserResult;
 import com.ipsen.spine.exception.NotFoundException;
-import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.User;
 import com.ipsen.spine.repository.UserRepository;
-import com.ipsen.spine.security.AdminSecurity;
-import com.ipsen.spine.security.FicterSecurity;
+import com.ipsen.spine.security.PermissionBeheerGebruikers;
+import com.ipsen.spine.security.PermissionLezen;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +25,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    @AdminSecurity
+    @PermissionBeheerGebruikers
     public void delete(long id) throws NotFoundException {
         Optional<User> optionalUser = this.userRepository.findById(id);
 
@@ -39,7 +37,7 @@ public class UserService implements UserDetailsService {
         this.userRepository.delete(user);
     }
 
-
+    @PermissionLezen
     public List<User> findAll() {
         return userRepository.findAll();
     }
