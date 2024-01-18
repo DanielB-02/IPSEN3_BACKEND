@@ -27,7 +27,7 @@ public class TestDataLoader {
             "Meldingen overig",
             "Wetenschappelijke artikelen",
             "Krantenartikelen",
-            "Bereikbaar via browser (clearweb)?",
+            "Bereix kbaar via browser (clearweb)?",
             "Anderszins bereikbaar (bijv. Darkweb)",
             "Gerelateerd aan andere platforms?",
             "Actief op andere platforms?",
