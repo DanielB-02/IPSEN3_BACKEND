@@ -1,11 +1,14 @@
 package com.ipsen.spine.service;
 
 import com.ipsen.spine.controller.vo.RolePermissionForm;
+import com.ipsen.spine.controller.vo.RoleResult;
 import com.ipsen.spine.exception.NotFoundException;
 import com.ipsen.spine.model.Permission;
+import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.model.Role;
 import com.ipsen.spine.repository.RoleRepository;
 import com.ipsen.spine.security.PermissionBeheerRollen;
+import com.ipsen.spine.security.PermissionLezen;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ public class RoleService {
         return roleRepository.save(entityToSave);
     }
 
+    @PermissionBeheerRollen
     public Role update(long id, RolePermissionForm form) {
         Optional<Role> fetchedRole = roleRepository.findById(id);
         if(fetchedRole.isEmpty()){
@@ -43,5 +47,9 @@ public class RoleService {
         }
         role.setPermissions(permissions);
         return roleRepository.save(role);
+    }
+    @PermissionBeheerRollen
+    public Iterable<Role> readAll(){
+        return roleRepository.findAll();
     }
 }

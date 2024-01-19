@@ -24,7 +24,6 @@ public class PlatformController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-//    @RequestMapping(value = "", produces = "application/vnd.spine.api.v2+json", method = RequestMethod.GET)
     public Iterable<Platform> readAll(){
         return this.platformService.readAll();
     }

@@ -1,7 +1,9 @@
 package com.ipsen.spine.controller;
 
 import com.ipsen.spine.controller.vo.RolePermissionForm;
+import com.ipsen.spine.controller.vo.RoleResult;
 import com.ipsen.spine.model.Permission;
+import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.model.Role;
 import com.ipsen.spine.service.RoleService;
 import jakarta.validation.Valid;
@@ -14,6 +16,11 @@ public class RoleController {
 
     @Autowired
     private RoleService roleService;
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public Iterable<RoleResult> readAll(){
+        return RoleResult.toResult(this.roleService.readAll());
+    }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Role create(@RequestBody @Valid RolePermissionForm form) {
