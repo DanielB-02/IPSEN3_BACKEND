@@ -19,5 +19,8 @@ public class RoleController {
     public Role create(@RequestBody @Valid RolePermissionForm form) {
         return this.roleService.create(form);
     }
-
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Role update(@PathVariable long id, @RequestBody @Valid RolePermissionForm form) {
+        return this.roleService.update(id, form);
+    }
 }
