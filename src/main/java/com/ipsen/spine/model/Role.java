@@ -15,7 +15,6 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
 
     @ElementCollection(targetClass = Permission.class, fetch = FetchType.EAGER)
@@ -28,6 +27,7 @@ public class Role {
         return permissions.stream()
                 .anyMatch(permission -> matchPermission == permission);
     }
+
 }
 
 /*
