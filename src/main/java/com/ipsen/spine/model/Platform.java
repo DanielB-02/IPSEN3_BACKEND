@@ -15,6 +15,7 @@ public class Platform {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String platformName;
+    private boolean status = Boolean.FALSE;
 
 
     public Long getId() {
@@ -24,4 +25,12 @@ public class Platform {
     public void setPlatformName(String platformName) {
             this.platformName = platformName;
         }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

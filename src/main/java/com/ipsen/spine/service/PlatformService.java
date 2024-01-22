@@ -33,12 +33,14 @@ public class PlatformService {
 
     @PermissionDomeinBeheerAdmin
     public Platform update(Long id, PlatformForm form){
-        Optional<Platform> fetchedPlatform = platformRepository.findById(id);
-        if(fetchedPlatform.isEmpty()){
-            throw new NotFoundException("Platform with id: " + id + " not found");
-        }
-        return savePlatform(form, fetchedPlatform.get());
+
+        Platform existingPlatform = platformRepository.findPlatformById(id);
+        existingPlatform.setStatus(form.isStatus());
+        existingPlatform.setPlatformName(form.platformName);
+        return platformRepository.save(existingPlatform);
     }
+
+
 
     private Platform savePlatform(PlatformForm form, Platform entityToSave) {
         entityToSave.setPlatformName(form.platformName);
@@ -77,6 +79,7 @@ public class PlatformService {
             result.id = platform.getId();
             result.platformName = platform.getPlatformName();
             result.score = score;
+            result.status = platform.isStatus();
             platformResults.add(result);
         }
         // Sort the list in order of the scores
@@ -87,22 +90,25 @@ public class PlatformService {
     @PermissionLezen
     public List<PlatformScoreResult> readAllSortByScoreDesc() {
         List<PlatformScoreResult> platformResults = new ArrayList<>();
-        // Gather the platforms with their scores
+
         for (Platform platform : platformRepository.findAll()) {
-            int score = 0;
-            for (Answer answer : answerRepository.findByQuestionPlatform(platform)) {
-                score += answer.getScore();
+            if (!platform.isStatus()) {
+                int score = 0;
+                for (Answer answer : answerRepository.findByQuestionPlatform(platform)) {
+                    score += answer.getScore();
+                }
+                PlatformScoreResult result = new PlatformScoreResult();
+                result.id = platform.getId();
+                result.platformName = platform.getPlatformName();
+                result.score = score;
+                result.status = platform.isStatus();
+                platformResults.add(result);
             }
-            PlatformScoreResult result = new PlatformScoreResult();
-            result.id = platform.getId();
-            result.platformName = platform.getPlatformName();
-            result.score = score;
-            platformResults.add(result);
         }
-        // Sort the list in order of the scores
-        platformResults.sort(Comparator.comparingInt(o -> o.score));
-        return platformResults;
-    }
+
+            platformResults.sort(Comparator.comparingInt(o -> o.score));
+            return platformResults;
+        }
 }
 
 
