@@ -270,9 +270,9 @@ public class TestDataLoader {
             BEHEER_ROLLEN);
 
  */
-        createUser("Sebastiaan", "Landers", "admin@spine.com", "12345", admin);
-        createUser("Shivane", "Frauenfelder", "ficter@spine.com", "12345", ficter);
-        createUser("Floris", "Admiraal", "readonly@spine.com", "12345", readonly);
+        createUser("Sebastiaan", "Landers", "admin@spine.com", "12345@spine.com", admin);
+        createUser("Shivane", "Frauenfelder", "ficter@spine.com", "12345@spine.com", ficter);
+        createUser("Floris", "Admiraal", "readonly@spine.com", "12345@spine.com", readonly);
         Platform twitter = createPlatform("Twitter");
         Platform facebook = createPlatform("Facebook");
         Platform instagram = createPlatform("Instagram");

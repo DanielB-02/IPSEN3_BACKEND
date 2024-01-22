@@ -14,7 +14,8 @@ public class SignUpRequest {
     private String firstName;
     private String lastName;
     private String email;
-    @Size(min = 8)
+    @Size(min = 12)
+    @Size(max = 64)
     private String password;
     private long roleId;
 }
