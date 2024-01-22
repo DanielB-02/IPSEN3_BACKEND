@@ -8,7 +8,7 @@ public class UserResult {
     public String firstName;
     public String lastName;
     public String email;
-    public Role role;
+    public String role;
 
     public static UserResult create(User user) {
         UserResult result = new UserResult();
@@ -16,7 +16,7 @@ public class UserResult {
         result.email = user.getEmail();
         result.firstName = user.getFirstName();
         result.lastName = user.getLastName();
-        result.role = user.getRole();
+        result.role = user.getRole().getName();
         return result;
     }
 }

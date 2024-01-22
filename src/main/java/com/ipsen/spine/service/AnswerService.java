@@ -6,8 +6,8 @@ import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.repository.QuestionRepository;
-import com.ipsen.spine.security.FicterSecurity;
-import com.ipsen.spine.security.ReadOnlySecurity;
+import com.ipsen.spine.security.PermissionDomeinBeheerFicter;
+import com.ipsen.spine.security.PermissionLezen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +22,12 @@ public class AnswerService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public Iterable<Answer> all(){
         return this.answerRepository.findAll();
     }
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public List<Answer> getByQuestionId(Long questionId) {
         if (!questionRepository.existsById(questionId)) {
             throw new NotFoundException("Question with id " + questionId + " not found");
@@ -36,7 +36,7 @@ public class AnswerService {
     }
 
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public Answer getById(long id){
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
         if(optionalAnswer.isEmpty()){
@@ -46,12 +46,12 @@ public class AnswerService {
         return optionalAnswer.get();
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public Answer create(AnswerForm form){
         return save(form, new Answer());
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public Answer update(AnswerForm form, long id) throws NotFoundException{
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
         if(optionalAnswer.isEmpty()){
@@ -70,7 +70,7 @@ public class AnswerService {
         return this.answerRepository.save(entityToSave);
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public void delete(long id) throws NotFoundException{
         Optional<Answer> optionalAnswer = this.answerRepository.findById(id);
 
@@ -84,3 +84,6 @@ public class AnswerService {
 
 
 }
+
+
+

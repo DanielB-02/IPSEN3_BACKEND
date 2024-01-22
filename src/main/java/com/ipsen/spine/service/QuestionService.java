@@ -6,9 +6,8 @@ import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.model.Question;
 import com.ipsen.spine.repository.PlatformRepository;
 import com.ipsen.spine.repository.QuestionRepository;
-import com.ipsen.spine.security.FicterSecurity;
-import com.ipsen.spine.security.ReadOnlySecurity;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ipsen.spine.security.PermissionDomeinBeheerFicter;
+import com.ipsen.spine.security.PermissionLezen;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -25,12 +24,12 @@ public class QuestionService {
         this.platformRepository = platformRepository;
     }
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public Iterable<Question> readAll(){
         return questionRepository.findAll();
     }
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public Question readSingle(Long id){
         Optional<Question> question = questionRepository.findById(id);
         if (question.isEmpty()) {
@@ -39,12 +38,12 @@ public class QuestionService {
         return question.get();
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public Question create(QuestionForm questionForm){
         return save(questionForm, new Question());
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public Question update(Long id, QuestionForm questionForm){
         Optional<Question> fetchedQuestion = questionRepository.findById(id);
         if(fetchedQuestion.isEmpty()){
@@ -53,7 +52,7 @@ public class QuestionService {
         return save(questionForm, fetchedQuestion.get());
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     private Question save(QuestionForm form, Question question) {
         Optional<Platform> fetchedPlatform = platformRepository.findById(form.platformId);
         if(fetchedPlatform.isEmpty()){
@@ -64,12 +63,12 @@ public class QuestionService {
         return this.questionRepository.save(question);
     }
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public List<Question> getByPlatformId(Long platformId) {
         return this.questionRepository.findByPlatformId(platformId);
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public void delete(Long id){
         if (!questionRepository.existsById(id)) {
             throw new NotFoundException("Post with id: " + id + " not found");

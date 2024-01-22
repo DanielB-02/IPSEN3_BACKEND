@@ -7,12 +7,16 @@ import com.ipsen.spine.model.Answer;
 import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.repository.PlatformRepository;
-import com.ipsen.spine.security.FicterSecurity;
-import com.ipsen.spine.security.ReadOnlySecurity;
+import com.ipsen.spine.security.PermissionDomeinBeheerAdmin;
+import com.ipsen.spine.security.PermissionDomeinBeheerFicter;
+import com.ipsen.spine.security.PermissionLezen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PlatformService {
@@ -22,12 +26,12 @@ public class PlatformService {
     @Autowired
     private AnswerRepository answerRepository;
 
-    @FicterSecurity
+    @PermissionDomeinBeheerFicter
     public Platform create(PlatformForm form){
         return savePlatform(form, new Platform());
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerAdmin
     public Platform update(Long id, PlatformForm form){
         Optional<Platform> fetchedPlatform = platformRepository.findById(id);
         if(fetchedPlatform.isEmpty()){
@@ -42,16 +46,17 @@ public class PlatformService {
     }
 
 
+    @PermissionLezen
     public Iterable<Platform> readAll(){
         return platformRepository.findAll();
     }
 
-    @ReadOnlySecurity
+    @PermissionLezen
     public Optional<Platform> readSingle(Long id){
         return platformRepository.findById(id);
     }
 
-    @FicterSecurity
+    @PermissionDomeinBeheerAdmin
     public void delete(Long id){
         if (!platformRepository.existsById(id)) {
             throw new NotFoundException("Platform with id: " + id + " not found");
@@ -59,6 +64,7 @@ public class PlatformService {
         platformRepository.deleteById(id);
     }
 
+    @PermissionLezen
     public List<PlatformScoreResult> readAllSortByScore() {
         List<PlatformScoreResult> platformResults = new ArrayList<>();
         // Gather the platforms with their scores
@@ -78,6 +84,7 @@ public class PlatformService {
         return platformResults;
     }
 
+    @PermissionLezen
     public List<PlatformScoreResult> readAllSortByScoreDesc() {
         List<PlatformScoreResult> platformResults = new ArrayList<>();
         // Gather the platforms with their scores

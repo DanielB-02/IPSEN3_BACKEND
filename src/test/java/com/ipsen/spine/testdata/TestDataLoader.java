@@ -1,19 +1,18 @@
 package com.ipsen.spine.testdata;
 
 import com.ipsen.spine.model.*;
-import com.ipsen.spine.repository.AnswerRepository;
-import com.ipsen.spine.repository.PlatformRepository;
-import com.ipsen.spine.repository.QuestionRepository;
-import com.ipsen.spine.repository.UserRepository;
+import com.ipsen.spine.repository.*;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static com.ipsen.spine.model.Permission.*;
 import static com.ipsen.spine.model.Role.*;
 
 @Component
@@ -234,6 +233,7 @@ public class TestDataLoader {
     );
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PlatformRepository platformRepository;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
@@ -241,9 +241,26 @@ public class TestDataLoader {
 
     @PostConstruct
     private void saveTestData() {
-        createUser("Sebastiaan", "Landers", "admin@spine.com", "12345", ADMIN);
-        createUser("Shivane", "Frauenfelder", "ficter@spine.com", "12345", FICTER);
-        createUser("Floris", "Admiraal", "readonly@spine.com", "12345", READONLY);
+        Role admin = createRole("ADMIN", LEZEN, DOMEIN_BEHEER_ADMIN, DOMEIN_BEHEER_FICTER, BEHEER_GEBRUIKERS, BEHEER_ROLLEN);
+        Role ficter = createRole("FICTER", LEZEN, DOMEIN_BEHEER_FICTER);
+        Role readonly = createRole("READONLY", LEZEN);
+/*
+    READONLY(
+            LEZEN),
+    FICTER(
+            LEZEN,
+            DOMEIN_BEHEER_FICTER),
+    ADMIN(
+            LEZEN,
+            DOMEIN_BEHEER_ADMIN,
+            DOMEIN_BEHEER_FICTER,
+            BEHEER_GEBRUIKERS,
+            BEHEER_ROLLEN);
+
+ */
+        createUser("Sebastiaan", "Landers", "admin@spine.com", "12345", admin);
+        createUser("Shivane", "Frauenfelder", "ficter@spine.com", "12345", ficter);
+        createUser("Floris", "Admiraal", "readonly@spine.com", "12345", readonly);
         Platform twitter = createPlatform("Twitter");
         Platform facebook = createPlatform("Facebook");
         Platform instagram = createPlatform("Instagram");
@@ -259,6 +276,15 @@ public class TestDataLoader {
                 tumblr
         );
         platforms.forEach(this::createQuestionsAndAnswers);
+    }
+
+    private Role createRole(String name, Permission... permissions) {
+        Role role = new Role();
+        role.setName(name);
+        Arrays.stream(permissions).forEach(permission -> {
+            role.getPermissions().add(permission);
+        });
+        return roleRepository.save(role);
     }
 
     private void createQuestionsAndAnswers(Platform platform) {
@@ -278,7 +304,8 @@ public class TestDataLoader {
                 .lastName(lastName)
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .role(role).build();
+                .role(role)
+                .build();
         userRepository.save(user);
     }
 
