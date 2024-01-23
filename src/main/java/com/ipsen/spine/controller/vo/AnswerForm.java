@@ -7,4 +7,7 @@ public class AnswerForm {
     public String textAnswer;
     @NotNull
     public Long questionId;
+
+    @NotNull
+    public int score;
 }

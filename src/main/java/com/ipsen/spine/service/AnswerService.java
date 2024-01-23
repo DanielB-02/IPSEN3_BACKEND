@@ -67,6 +67,7 @@ public class AnswerService {
         }
         entityToSave.setQuestion(fetchedQuestion.get());
         entityToSave.setTextAnswer(form.textAnswer);
+        entityToSave.setScore(form.score);
         return this.answerRepository.save(entityToSave);
     }
 
