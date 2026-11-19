@@ -30,7 +30,9 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/**").permitAll()
-// TODO tijdelijk de beveiliging uitgezet
+                        // NOTE: all URLs are currently open at the filter level; access is enforced
+                        // per service method via @PreAuthorize permission annotations (see security/).
+                        // The rules below are unreachable until the line above is removed.
                         .requestMatchers("/auth/**", "/error").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

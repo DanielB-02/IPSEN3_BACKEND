@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 @SpringBootApplication
-// TODO tijdelijk de beveiliging uitgezet
 @EnableMethodSecurity(securedEnabled = true)
 public class IpsenSpineApplication {
 

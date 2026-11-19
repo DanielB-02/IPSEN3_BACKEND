@@ -19,6 +19,9 @@ import static com.ipsen.spine.model.Role.*;
 @RequiredArgsConstructor
 @Profile("testdata")
 public class TestDataLoader {
+    // Local demo accounts only (profile "testdata", in-memory seed data). Not a real credential.
+    private static final String DEMO_PASSWORD = "12345@spine.com";
+
     private static final List<String> QUESTIONS = List.of(
             "Jurisprudentie",
             "Online Outreach",
@@ -256,23 +259,9 @@ public class TestDataLoader {
         Role admin = createRole("ADMIN", LEZEN, DOMEIN_BEHEER_ADMIN, DOMEIN_BEHEER_FICTER, BEHEER_GEBRUIKERS, BEHEER_ROLLEN);
         Role ficter = createRole("FICTER", LEZEN, DOMEIN_BEHEER_FICTER);
         Role readonly = createRole("READONLY", LEZEN);
-/*
-    READONLY(
-            LEZEN),
-    FICTER(
-            LEZEN,
-            DOMEIN_BEHEER_FICTER),
-    ADMIN(
-            LEZEN,
-            DOMEIN_BEHEER_ADMIN,
-            DOMEIN_BEHEER_FICTER,
-            BEHEER_GEBRUIKERS,
-            BEHEER_ROLLEN);
-
- */
-        createUser("Sebastiaan", "Landers", "spineadmin2024", "12345@spine.com", admin);
-        createUser("Shivane", "Frauenfelder", "spineficter2024", "12345@spine.com", ficter);
-        createUser("Floris", "Admiraal", "spinereadonly2024", "12345@spine.com", readonly);
+        createUser("Demo", "Admin", "spineadmin2024", DEMO_PASSWORD, admin);
+        createUser("Demo", "Ficter", "spineficter2024", DEMO_PASSWORD, ficter);
+        createUser("Demo", "Reader", "spinereadonly2024", DEMO_PASSWORD, readonly);
         Platform twitter = createPlatform("Twitter");
         Platform facebook = createPlatform("Facebook");
         Platform instagram = createPlatform("Instagram");
@@ -310,11 +299,12 @@ public class TestDataLoader {
         }
     }
 
-    private void createUser(String firstName, String lastName, String email, String password, Role role) {
+    // The username is stored in the email column (User#getUsername returns email).
+    private void createUser(String firstName, String lastName, String username, String password, Role role) {
         var user = User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
-                .email(email)
+                .email(username)
                 .password(passwordEncoder.encode(password))
                 .role(role)
                 .build();
