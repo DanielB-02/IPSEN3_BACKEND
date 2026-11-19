@@ -7,13 +7,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class JwtServiceTest {
 
-    // Test-only keys (base64, >= 256 bits). Not used outside this test.
-    private static final String KEY = "dGVzdC1vbmx5LXNpZ25pbmcta2V5LW5vdC1hLXNlY3JldC0wMTIzNDU2Nzg5";
-    private static final String OTHER_KEY = "YW5vdGhlci10ZXN0LW9ubHkta2V5LWZvci1zaWduYXR1cmUtY2hlY2tzLTk4NzY1";
+    // Test-only keys built at runtime (32 repeated bytes = 256 bits); not secrets.
+    private static final String KEY = base64Key('a');
+    private static final String OTHER_KEY = base64Key('b');
 
     private JwtService jwtService;
     private final UserDetails alice = User.withUsername("alice").password("x").authorities("ADMIN").build();
@@ -44,6 +47,10 @@ class JwtServiceTest {
         String foreignToken = serviceWithKey(OTHER_KEY).generateToken(alice);
 
         assertThrows(SignatureException.class, () -> jwtService.extractUserName(foreignToken));
+    }
+
+    private static String base64Key(char fill) {
+        return Base64.getEncoder().encodeToString(String.valueOf(fill).repeat(32).getBytes(StandardCharsets.US_ASCII));
     }
 
     private static JwtService serviceWithKey(String key) {
