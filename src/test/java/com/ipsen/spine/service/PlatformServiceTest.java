@@ -2,14 +2,21 @@ package com.ipsen.spine.service;
 
 import com.ipsen.spine.controller.vo.PlatformScoreResult;
 import com.ipsen.spine.model.Answer;
+import com.ipsen.spine.model.Permission;
 import com.ipsen.spine.model.Platform;
 import com.ipsen.spine.model.Question;
+import com.ipsen.spine.model.Role;
+import com.ipsen.spine.model.User;
 import com.ipsen.spine.repository.AnswerRepository;
 import com.ipsen.spine.repository.PlatformRepository;
 import com.ipsen.spine.repository.QuestionRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +25,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@ActiveProfiles("personal")
+@ActiveProfiles("test")
 public class PlatformServiceTest {
 
     @Autowired
@@ -29,6 +36,22 @@ public class PlatformServiceTest {
     private AnswerRepository answerRepository;
     @Autowired
     private PlatformService platformService;
+
+    @BeforeEach
+    void signInAsReader() {
+        // PlatformService methods are guarded by @PermissionLezen, so a user with LEZEN is required.
+        Role reader = new Role();
+        reader.setName("READONLY");
+        reader.getPermissions().add(Permission.LEZEN);
+        User user = User.builder().email("reader").role(reader).build();
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities()));
+    }
+
+    @AfterEach
+    void clearSecurityContext() {
+        SecurityContextHolder.clearContext();
+    }
 
     @Test
     @Transactional
