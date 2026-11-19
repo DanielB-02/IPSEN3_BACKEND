@@ -50,16 +50,5 @@ public class QuestionServiceTest {
         );
 
         assertThat(expectedErrorMessage, is(thrown.getMessage()));
-
-
     }
-
-//    findByPlatformId
-
-
-
-
-
-
-
 }

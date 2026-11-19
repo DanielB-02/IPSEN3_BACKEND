@@ -40,13 +40,10 @@ public class PlatformService {
         return platformRepository.save(existingPlatform);
     }
 
-
-
     private Platform savePlatform(PlatformForm form, Platform entityToSave) {
         entityToSave.setPlatformName(form.platformName);
         return this.platformRepository.save(entityToSave);
     }
-
 
     @PermissionLezen
     public Iterable<Platform> readAll(){
@@ -106,9 +103,9 @@ public class PlatformService {
             }
         }
 
-            platformResults.sort(Comparator.comparingInt(o -> o.score));
-            return platformResults;
-        }
+        platformResults.sort(Comparator.comparingInt(o -> o.score));
+        return platformResults;
+    }
 }
 
 
